@@ -119,10 +119,10 @@ public class CardboardEditor : Editor {
     if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.iPhone
         && !Application.isPlaying
         && Object.FindObjectOfType<Cardboard>() != null
-        && PlayerSettings.targetIOSGraphics != TargetIOSGraphics.OpenGLES_2_0
-        && PlayerSettings.targetIOSGraphics != TargetIOSGraphics.OpenGLES_3_0) {
-      Debug.LogWarning("iOS Graphics API should be set to OpenGL for best distortion-"
-        + "correction performance in Cardboard.");
+        && PlayerSettings.GetGraphicsAPIs(BuildTarget.iPhone).Contains(GraphicsDeviceType.OpenGLES2)
+        && PlayerSettings.GetGraphicsAPIs(BuildTarget.iPhone).Contains(GraphicsDeviceType.OpenGLES3)){
+        Debug.LogWarning("iOS Graphics API should be set to OpenGL for best distortion-"
+          + "correction performance in Cardboard.");
     }
   }
 }
